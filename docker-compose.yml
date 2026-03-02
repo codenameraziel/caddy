@@ -2,7 +2,7 @@ version: "3.8"
 
 services:
   caddy:
-    image: caddy:latest
+    build: ./caddy
     container_name: janus-caddy
     restart: unless-stopped
     ports:
