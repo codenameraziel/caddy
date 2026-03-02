@@ -1,19 +1,24 @@
- # -------------------------------
-  # Proxy Reverso (Caddy com Tailscale)
-  # -------------------------------
+version: "3.8"
+
+services:
   caddy:
     image: caddy:latest
     container_name: janus-caddy
     restart: unless-stopped
     ports:
-      - "443:443"       # Porta HTTPS padrão
-      - "443:443/udp"   # Necessário para HTTP/3 (QUIC)
+      - "443:443"
+      - "443:443/udp"
     volumes:
-      - ./caddy:/etc/caddy   
+      - ./caddy:/etc/caddy
       - caddy_data:/data
       - caddy_config:/config
-    depends_on:
-      - janus
-      - web
     networks:
       - internal_net
+
+networks:
+  internal_net:
+    external: true
+
+volumes:
+  caddy_data:
+  caddy_config:
