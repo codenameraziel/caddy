@@ -39,4 +39,9 @@ umbrel.tailc9398a.ts.net {
     handle /ws/obico* {
         reverse_proxy obico:3334
     }
+
+    # Cockpit interface
+    handle /cockpit* {
+        reverse_proxy cockpit:9090
+    }
 }
