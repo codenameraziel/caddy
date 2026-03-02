@@ -17,7 +17,7 @@ services:
 
 networks:
   internal_net:
-    external: true
+    driver: bridge
 
 volumes:
   caddy_data:
