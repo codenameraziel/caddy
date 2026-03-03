@@ -6,12 +6,13 @@ services:
     container_name: caddy
     restart: unless-stopped
     ports:
-      - "443:443"
-      - "443:443/udp"
+      - "80:80"          # Porta necessária para validação ACME/Let's Encrypt
+      - "443:443"        # HTTPS
+      - "443:443/udp"    # HTTP/3 (QUIC)
     volumes:
-      - ./caddy:/etc/caddy
-      - caddy_data:/data
-      - caddy_config:/config
+      - ./caddy:/etc/caddy       # Pasta com o Caddyfile
+      - caddy_data:/data         # Certificados e cache
+      - caddy_config:/config     # Configuração interna binária
     networks:
       - internal_net
 
