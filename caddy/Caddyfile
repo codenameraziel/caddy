@@ -1,16 +1,7 @@
-{
-    email ricardo@exemplo.com
-}
-
 # Obico
-obico.codenameraziel.duckdns.org {
+obico-codenameraziel.duckdns.org {
     encode gzip
     reverse_proxy obico:3334
-
-    # Forçar HTTPS
-    redir / https://{host}{uri} permanent
-
-    # Cabeçalhos extras de segurança
     header {
         Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
         X-Content-Type-Options "nosniff"
@@ -21,12 +12,9 @@ obico.codenameraziel.duckdns.org {
 }
 
 # OctoPrint
-octoprint.codenameraziel.duckdns.org {
+octoprint-codenameraziel.duckdns.org {
     encode gzip
     reverse_proxy octoprint:5000
-
-    redir / https://{host}{uri} permanent
-
     header {
         Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
         X-Content-Type-Options "nosniff"
@@ -37,15 +25,11 @@ octoprint.codenameraziel.duckdns.org {
 }
 
 # Janus
-janus.codenameraziel.duckdns.org {
+janus-codenameraziel.duckdns.org {
     encode gzip
-
-    # API HTTP
     handle /janus* {
         reverse_proxy janus:8088
     }
-
-    # WebSockets API
     handle /ws* {
         reverse_proxy janus:8188 {
             transport http {
@@ -56,13 +40,9 @@ janus.codenameraziel.duckdns.org {
             header_up Connection {http.request.header.Connection}
         }
     }
-
-    # Admin API
     handle /admin* {
         reverse_proxy janus:7088
     }
-
-    # Admin WebSockets
     handle /adminws* {
         reverse_proxy janus:7888 {
             transport http {
@@ -73,14 +53,9 @@ janus.codenameraziel.duckdns.org {
             header_up Connection {http.request.header.Connection}
         }
     }
-
-    # Frontend demos
     handle /demos* {
         reverse_proxy janus-web:8081
     }
-
-    redir / https://{host}{uri} permanent
-
     header {
         Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
         X-Content-Type-Options "nosniff"
@@ -91,12 +66,9 @@ janus.codenameraziel.duckdns.org {
 }
 
 # Cockpit
-cockpit.codenameraziel.duckdns.org {
+cockpit-codenameraziel.duckdns.org {
     encode gzip
     reverse_proxy cockpit:9090
-
-    redir / https://{host}{uri} permanent
-
     header {
         Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
         X-Content-Type-Options "nosniff"
