@@ -6,13 +6,13 @@ services:
     container_name: caddy
     restart: unless-stopped
     ports:
-      - "80:80"          
-      - "443:443"        
-      - "443:443/udp"    
+      - "8880:80"          # HTTP externo na 8880
+      - "443:443"          # HTTPS externo na 443
+      - "443:443/udp"      # QUIC/HTTP3
     volumes:
-      - ./caddy:/etc/caddy       
-      - caddy_data:/data         
-      - caddy_config:/config     
+      - ./caddy:/etc/caddy
+      - caddy_data:/data
+      - caddy_config:/config
     networks:
       - internal_net
 

@@ -1,3 +1,9 @@
-umbrel.tailc9398a.ts.net {
+# Redireciona todo acesso HTTP (porta 8880) para HTTPS
+umbrel.tailc9398a.ts.net:8880 {
+    redir https://umbrel.tailc9398a.ts.net{uri}
+}
+
+# Proxy reverso para OctoPrint via HTTPS
+umbrel.tailc9398a.ts.net:443 {
     reverse_proxy localhost:5003
 }
