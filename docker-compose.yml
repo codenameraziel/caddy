@@ -12,15 +12,7 @@ services:
       - caddy_data:/data          # dados persistentes (certificados, etc.)
       - caddy_config:/config      # configs internas
       - /var/run/tailscale:/var/run/tailscale  # socket do tailscaled
-    networks:
-      - internal_net
-      - umbrel_main_network       # rede externa correta do Umbrel
-
-networks:
-  internal_net:
-    driver: bridge
-    external: true   # ja existe no host
-
+     
 volumes:
   caddy_data:
   caddy_config:
