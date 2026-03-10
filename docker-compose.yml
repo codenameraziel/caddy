@@ -19,7 +19,6 @@ services:
 networks:
   internal_net:
     driver: bridge
-  umbrel_main_network:
     external: true   # ja existe no host
 
 volumes:
