@@ -5,5 +5,5 @@ umbrel.tailc9398a.ts.net:8880 {
 
 # Proxy reverso para OctoPrint via HTTPS
 umbrel.tailc9398a.ts.net:443 {
-    reverse_proxy localhost:5003
+    reverse_proxy octoprint_web_1:80
 }

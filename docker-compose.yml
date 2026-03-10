@@ -1,10 +1,8 @@
-version: "3.8"
-
 services:
   caddy:
     image: caddy:latest
     container_name: caddy
-    restart: unless-stopped
+    restart: unless-stopped   # garante reinicio automatico
     ports:
       - "8880:80"          # HTTP externo na porta 8880
       - "443:443"          # HTTPS externo na porta 443
@@ -13,13 +11,16 @@ services:
       - ./caddy:/etc/caddy        # Caddyfile e configs
       - caddy_data:/data          # dados persistentes (certificados, etc.)
       - caddy_config:/config      # configs internas
-      - /var/run/tailscale:/var/run/tailscale  # monta o socket do tailscaled
+      - /var/run/tailscale:/var/run/tailscale  # socket do tailscaled
     networks:
       - internal_net
+      - umbrel_main_network       # rede externa correta do Umbrel
 
 networks:
   internal_net:
     driver: bridge
+  umbrel_main_network:
+    external: true   # ja existe no host
 
 volumes:
   caddy_data:
