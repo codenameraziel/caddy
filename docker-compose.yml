@@ -13,6 +13,7 @@ services:
       - /dev/net/tun
     volumes:
       - tailscale-data:/var/lib/tailscale
+      - /var/run/tailscale:/var/run/tailscale
     command: tailscaled
 
   caddy:
@@ -22,6 +23,7 @@ services:
     volumes:
       - caddy_data:/data
       - caddy_config:/config
+      - /var/run/tailscale:/var/run/tailscale:ro
     ports:
       - "80:80"
       - "443:443"
