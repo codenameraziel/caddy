@@ -1,0 +1,13 @@
+FROM tailscale/tailscale:latest
+
+# Instalar bash e ferramentas úteis
+RUN apk add --no-cache bash curl iproute2
+
+# Definir bash como shell padrão
+SHELL ["/bin/bash", "-c"]
+
+# Diretório de trabalho
+WORKDIR /srv
+
+# Comando padrão: iniciar o daemon
+CMD ["tailscaled"]

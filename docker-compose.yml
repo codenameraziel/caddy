@@ -2,7 +2,7 @@ version: "3.9"
 
 services:
   tailscale:
-    image: tailscale/tailscale:latest
+    build: ./tailscale
     container_name: tailscale
     restart: always
     network_mode: "host"
