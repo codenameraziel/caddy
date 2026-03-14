@@ -14,17 +14,6 @@ services:
       - "443:443"
     networks:
       - internal_net
-
-  openclaw-web:
-    image: openclaw:latest
-    container_name: openclaw-web
-    restart: always
-    ports:
-      - "8080:8080"
-      - "3100:3100"
-    networks:
-      - internal_net
-
 networks:
   internal_net:
     driver: bridge
