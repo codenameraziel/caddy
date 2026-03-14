@@ -7,7 +7,6 @@ services:
       - "8880:80"          # HTTP externo na porta 8880
       - "443:443"          # HTTPS externo na porta 443
       - "443:443/udp"      # QUIC/HTTP3
-      - "3100:3100"
     volumes:
       - ./caddy:/etc/caddy        # Caddyfile e configs
       - caddy_data:/data          # dados persistentes (certificados, etc.)
