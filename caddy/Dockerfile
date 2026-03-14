@@ -2,7 +2,7 @@ FROM caddy:latest
 
 RUN apk add --no-cache curl vim nano openssl bash tzdata
 
-COPY ./caddy/Caddyfile /etc/caddy/Caddyfile
+COPY ./Caddyfile /etc/caddy/Caddyfile
 
 VOLUME /data
 VOLUME /config
