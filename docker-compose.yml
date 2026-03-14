@@ -22,7 +22,6 @@ services:
     restart: always
     network_mode: "host"
     volumes:
-      - ./Caddyfile:/etc/caddy/Caddyfile
       - caddy_data:/data
       - caddy_config:/config
       - /var/run/tailscale:/var/run/tailscale:ro
