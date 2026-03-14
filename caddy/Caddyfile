@@ -1,9 +1,14 @@
-# Redireciona todo acesso HTTP (porta 8880) para HTTPS
-umbrel.tailc9398a.ts.net:8880 {
-    redir https://umbrel.tailc9398a.ts.net{uri}
-}
+umbrel.tailc9398a.ts.net {
+    # OctoPrint via proxy do Umbrel
+    handle_path /octoprint/* {
+        reverse_proxy 127.0.0.1:5003
+    }
 
-# Proxy reverso para OctoPrint via HTTPS
-umbrel.tailc9398a.ts.net:443 {
-    reverse_proxy octoprint_web_1:80
+    # OpenClaw direto na raiz
+    reverse_proxy openclaw-web:8080
+
+    # WebSocket do OpenClaw
+    handle_path /ws/* {
+        reverse_proxy openclaw-web:18791
+    }
 }
