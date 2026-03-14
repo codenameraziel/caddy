@@ -1,0 +1,36 @@
+portainer.tailc9398a.ts.net {
+    # OctoPrint via proxy do Umbrel
+    handle_path /octoprint/* {
+        reverse_proxy 127.0.0.1:5003
+    }
+
+    # OpenClaw direto na raiz (HTTP normal)
+    reverse_proxy openclaw-web:8080
+
+    # WebSocket do OpenClaw
+    handle_path /ws/* {
+        reverse_proxy openclaw-web:3100 {
+            transport http {
+                compression off
+            }
+        }
+    }
+
+    # Portainer (interface web)
+    handle_path /portainer/* {
+        reverse_proxy 127.0.0.1:9000 {
+            transport http {
+                compression off
+            }
+        }
+    }
+
+    # Portainer (HTTPS seguro)
+    handle_path /portainer-secure/* {
+        reverse_proxy 127.0.0.1:9443 {
+            transport http {
+                compression off
+            }
+        }
+    }
+}
