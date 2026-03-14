@@ -2,7 +2,7 @@ version: "3.9"
 
 services:
   tailscale:
-    build: ./tailscale
+    build: ./tailscale   # Dockerfile customizado com bash, se você quiser
     container_name: tailscale
     restart: always
     network_mode: "host"
@@ -14,7 +14,20 @@ services:
     volumes:
       - tailscale-data:/var/lib/tailscale
       - /var/run/tailscale:/var/run/tailscale
-    command: tailscaled
+    command: tailscaled --state=/var/lib/tailscale/tailscaled.state --socket=/var/run/tailscale/tailscaled.sock
+
+  portainer:
+    image: portainer/portainer-ce:latest
+    container_name: portainer
+    restart: always
+    ports:
+      - "9000:9000"   # HTTP (sem TLS)
+      - "9443:9443"   # HTTPS (TLS)
+    volumes:
+      - portainer_data:/data
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - internal_net
 
   caddy:
     build: ./caddy
@@ -38,3 +51,5 @@ volumes:
   caddy_data:
   caddy_config:
   tailscale-data:
+  portainer_data:
+
