@@ -2,7 +2,7 @@ version: "3.9"
 
 services:
   tailscale:
-    build: ./tailscale   # Dockerfile customizado com bash, se você quiser
+    build: ./tailscale   # Dockerfile customizado com bash, se voce quiser
     container_name: tailscale
     restart: always
     network_mode: "host"
