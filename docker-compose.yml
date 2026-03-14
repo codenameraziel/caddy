@@ -1,3 +1,5 @@
+version: "3.9"
+
 services:
   tailscale:
     build: ./tailscale
@@ -14,39 +16,17 @@ services:
       - /var/run/tailscale:/var/run/tailscale
     command: tailscaled --state=/var/lib/tailscale/tailscaled.state --socket=/var/run/tailscale/tailscaled.sock
 
-  portainer:
-    image: portainer/portainer-ce:latest
-    container_name: portainer
-    restart: always
-    ports:
-      - "9000:9000"
-      - "9443:9443"
-    volumes:
-      - portainer_data:/data
-      - /var/run/docker.sock:/var/run/docker.sock
-    networks:
-      - internal_net
-
   caddy:
     build: ./caddy
     container_name: caddy
     restart: always
+    network_mode: "host"
     volumes:
       - caddy_data:/data
       - caddy_config:/config
       - /var/run/tailscale:/var/run/tailscale:ro
-    ports:
-      - "80:80"
-      - "443:443"
-    networks:
-      - internal_net
-
-networks:
-  internal_net:
-    driver: bridge
 
 volumes:
   caddy_data:
   caddy_config:
   tailscale-data:
-  portainer_data:
