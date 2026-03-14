@@ -1,18 +1,32 @@
+version: "3.9"
+
 services:
   caddy:
-    build: ./caddy
+    image: caddy:latest
     container_name: caddy
-    restart: unless-stopped   # garante reinicio automatico
-    ports:
-      - "8880:80"          # HTTP externo na porta 8880
-      - "443:443"          # HTTPS externo na porta 443
-      - "443:443/udp"      # QUIC/HTTP3
     volumes:
-      - ./caddy:/etc/caddy        # Caddyfile e configs
-      - caddy_data:/data          # dados persistentes (certificados, etc.)
-      - caddy_config:/config      # configs internas
-      - /var/run/tailscale:/var/run/tailscale  # socket do tailscaled
-     
+      - ./Caddyfile:/etc/caddy/Caddyfile
+      - caddy_data:/data
+      - caddy_config:/config
+    ports:
+      - "80:80"
+      - "443:443"
+    networks:
+      - internal_net
+
+  openclaw-web:
+    image: openclaw:latest
+    container_name: openclaw-web
+    ports:
+      - "8080:8080"
+      - "3100:3100"
+    networks:
+      - internal_net
+
+networks:
+  internal_net:
+    driver: bridge
+
 volumes:
   caddy_data:
   caddy_config:
