@@ -1,4 +1,4 @@
-umbrel.tailc9398a.ts.net {
+portainer.tailc9398a.ts.net {
     # OctoPrint via proxy do Umbrel
     handle_path /octoprint/* {
         reverse_proxy 127.0.0.1:5003
