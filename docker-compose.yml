@@ -4,6 +4,7 @@ services:
   caddy:
     image: caddy:latest
     container_name: caddy
+    restart: always
     volumes:
       - ./Caddyfile:/etc/caddy/Caddyfile
       - caddy_data:/data
@@ -17,6 +18,7 @@ services:
   openclaw-web:
     image: openclaw:latest
     container_name: openclaw-web
+    restart: always
     ports:
       - "8080:8080"
       - "3100:3100"
