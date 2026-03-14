@@ -25,6 +25,7 @@ services:
       - caddy_data:/data
       - caddy_config:/config
       - /var/run/tailscale:/var/run/tailscale:ro
+      - ./caddy/Caddyfile:/etc/caddy/Caddyfile   # <-- aqui está o bind com letra minúscula
 
 volumes:
   caddy_data:
