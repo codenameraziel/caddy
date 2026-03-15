@@ -20,7 +20,6 @@ services:
     build: ./caddy
     container_name: caddy
     restart: always
-    network_mode: "host"
     ports:
       - "80:80"
       - "443:443"

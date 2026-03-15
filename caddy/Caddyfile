@@ -1,5 +1,14 @@
+# Redireciona todo HTTP para HTTPS
 http://portainer.tailc9398a.ts.net {
+    redir https://{host}{uri}
+}
+
+# OpenClaw na raiz do domínio
+https://portainer.tailc9398a.ts.net {
+    # OpenClaw direto na raiz
     reverse_proxy openclaw-web:8080
+
+    # WebSocket do OpenClaw
     handle_path /ws/* {
         reverse_proxy openclaw-web:3100 {
             transport http {
@@ -7,13 +16,27 @@ http://portainer.tailc9398a.ts.net {
             }
         }
     }
-    handle_path /portainer/* {
-        reverse_proxy 127.0.0.1:9000
-    }
-    handle_path /portainer-secure/* {
-        reverse_proxy 127.0.0.1:9443
-    }
+
+    # OctoPrint
     handle_path /octoprint/* {
         reverse_proxy 127.0.0.1:5000
+    }
+
+    # Portainer (HTTP)
+    handle_path /portainer/* {
+        reverse_proxy 127.0.0.1:9000 {
+            transport http {
+                compression off
+            }
+        }
+    }
+
+    # Portainer (HTTPS interno, mas servido como HTTP para Tailscale cuidar do TLS)
+    handle_path /portainer-secure/* {
+        reverse_proxy 127.0.0.1:9443 {
+            transport http {
+                compression off
+            }
+        }
     }
 }
