@@ -26,6 +26,7 @@ services:
     volumes:
       - caddy_data:/data
       - caddy_config:/config
+      # monta o socket do tailscaled como somente leitura
       - /var/run/tailscale:/var/run/tailscale:ro
 
 volumes:
