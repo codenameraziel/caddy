@@ -1,5 +1,5 @@
-portainer.tailc9398a.ts.net {
-    # OctoPrint via proxy do portainer
+http://portainer.tailc9398a.ts.net {
+    # OctoPrint via proxy do Portainer
     handle_path /octoprint/* {
         reverse_proxy 127.0.0.1:5000
     }
@@ -25,7 +25,7 @@ portainer.tailc9398a.ts.net {
         }
     }
 
-    # Portainer (HTTPS seguro)
+    # Portainer (HTTPS interno, mas servido como HTTP para Tailscale cuidar do TLS)
     handle_path /portainer-secure/* {
         reverse_proxy 127.0.0.1:9443 {
             transport http {
