@@ -1,0 +1,19 @@
+version: "3.9"
+
+services:
+  caddy:
+    build: ./caddy
+    container_name: caddy
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./caddy:/etc/caddy        # Caddyfile e configs
+      - ./site:/usr/share/caddy   # pasta para servir arquivos estáticos
+      - caddy_data:/data          # dados persistentes (certificados, etc.)
+      - caddy_config:/config      # configs internas
+    restart: unless-stopped
+
+volumes:
+  caddy_data:
+  caddy_config:
