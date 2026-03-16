@@ -9,7 +9,7 @@ services:
       - "443:443"
     volumes:
       - ./caddy:/etc/caddy        # Caddyfile e configs
-      - ./site:/usr/share/caddy   # pasta para servir arquivos estáticos
+      - ./site:/usr/share/caddy   # pasta para servir arquivos estaticos
       - caddy_data:/data          # dados persistentes (certificados, etc.)
       - caddy_config:/config      # configs internas
     restart: unless-stopped
