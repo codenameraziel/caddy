@@ -4,3 +4,9 @@ octoprint.teccryptor3dprint.dpdns.org {
         header_up X-Forwarded-Proto {scheme}
     }
 }
+openclaw.teccryptor3dprint.dpdns.org {
+    reverse_proxy 192.168.100.105:8070 {
+        header_up X-Forwarded-For {remote_host}
+        header_up X-Forwarded-Proto {scheme}
+    }
+}
