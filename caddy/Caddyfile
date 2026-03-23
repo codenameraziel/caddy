@@ -1,5 +1,5 @@
 octoprint.teccryptor3dprint.dpdns.org {
-    reverse_proxy octoprint:5000 {
+    reverse_proxy octoprint:5003 {
         header_up Host {host}
         header_up X-Forwarded-Proto {scheme}
     }
