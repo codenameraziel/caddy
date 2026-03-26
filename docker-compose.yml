@@ -1,10 +1,11 @@
 version: "3.8"
 services:
   caddy:
-    image: ghcr.io/caddy-dns/cloudflare:latest
-    container_name: caddy-cloudflare
+    image: caddy:latest
+    container_name: caddy
     volumes:
       - ./caddy:/etc/caddy
+      - ./certs:/etc/caddy/certs
       - caddy_data:/data
       - caddy_config:/config
     ports:
