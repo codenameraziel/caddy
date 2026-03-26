@@ -6,7 +6,7 @@ services:
     environment:
       - CLOUDFLARE_API_TOKEN=cfat_THMBbVj6lL0yxMwITVJ2B7deOb1IKmq2iUy04vsP90e544aa
     volumes:
-      - ./Caddyfile:/etc/caddy/Caddyfile
+      - ./caddy:/etc/caddy
       - caddy_data:/data
       - caddy_config:/config
     ports:
