@@ -3,8 +3,6 @@ services:
   caddy:
     image: ghcr.io/caddy-dns/cloudflare:latest
     container_name: caddy-cloudflare
-    environment:
-      - CLOUDFLARE_API_TOKEN=cfat_THMBbVj6lL0yxMwITVJ2B7deOb1IKmq2iUy04vsP90e544aa
     volumes:
       - ./caddy:/etc/caddy
       - caddy_data:/data
