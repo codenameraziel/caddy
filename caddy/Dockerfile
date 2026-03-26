@@ -1,7 +1,18 @@
-# Base oficial do Caddy
-FROM caddy:latest
+# Usa imagem base do Go para compilar o Caddy com plugin
+FROM golang:1.22-alpine AS builder
 
-# Instala pacotes extras (exemplo: curl, vim, nano, openssl)
+# Instala dependências necessárias
+RUN apk add --no-cache git build-base
+
+# Compila o Caddy com o plugin Cloudflare
+RUN go install github.com/caddyserver/xcaddy/cmd/xcaddy@latest && \
+    xcaddy build \
+      --with github.com/caddy-dns/cloudflare
+
+# Imagem final baseada no Alpine
+FROM alpine:latest
+
+# Instala pacotes extras
 RUN apk add --no-cache \
     curl \
     vim \
@@ -10,13 +21,11 @@ RUN apk add --no-cache \
     bash \
     tzdata
 
-# Copia o Caddyfile customizado
-COPY ./Caddyfile /etc/caddy/Caddyfile
+# Copia binário do Caddy compilado
+COPY --from=builder /go/caddy /usr/bin/caddy
 
-# Copia plugins extras se necessário
-# Exemplo: caddy-dns plugin para Cloudflare
-# RUN xcaddy build \
-#     --with github.com/caddy-dns/cloudflare
+# Copia Caddyfile customizado
+COPY ./Caddyfile /etc/caddy/Caddyfile
 
 # Define diretórios de dados e configuração
 VOLUME /data
@@ -24,7 +33,7 @@ VOLUME /config
 
 # Porta padrão HTTPS
 EXPOSE 443
-# Porta HTTP (se quiser usar também)
+# Porta HTTP
 EXPOSE 80
 
 # Comando padrão
