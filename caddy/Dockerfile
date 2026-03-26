@@ -1,15 +1,15 @@
-# Usa imagem base do Go para compilar o Caddy com plugin
+# Etapa de build: compila o Caddy com plugin Cloudflare
 FROM golang:1.22-alpine AS builder
 
-# Instala dependências necessárias
+# Instala dependências
 RUN apk add --no-cache git build-base
 
-# Compila o Caddy com o plugin Cloudflare
+# Instala xcaddy e compila o Caddy com o plugin Cloudflare
 RUN go install github.com/caddyserver/xcaddy/cmd/xcaddy@latest && \
-    xcaddy build \
+    /go/bin/xcaddy build \
       --with github.com/caddy-dns/cloudflare
 
-# Imagem final baseada no Alpine
+# Etapa final: imagem leve com Caddy pronto
 FROM alpine:latest
 
 # Instala pacotes extras
@@ -21,7 +21,7 @@ RUN apk add --no-cache \
     bash \
     tzdata
 
-# Copia binário do Caddy compilado
+# Copia binário compilado
 COPY --from=builder /go/caddy /usr/bin/caddy
 
 # Copia Caddyfile customizado
@@ -38,3 +38,4 @@ EXPOSE 80
 
 # Comando padrão
 CMD ["caddy", "run", "--config", "/etc/caddy/Caddyfile", "--adapter", "caddyfile"]
+
