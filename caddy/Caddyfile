@@ -1,15 +1,44 @@
-{
-    acme_dns cloudflare {env.cfat_THMBbVj6lL0yxMwITVJ2B7deOb1IKmq2iUy04vsP90e544aa}
+portainer.teccryptor3dprint.dpdns.org {
+    tls /etc/caddy/certs/portainer.pem /etc/caddy/certs/portainer.key
+    reverse_proxy http://192.168.100.105:9000
+    log {
+        output file /var/log/caddy/portainer.log
+        level INFO
+    }
 }
 
-umbrel.teccryptor3dprint.dpdns.org {
-    reverse_proxy 127.0.0.1:7080
-}
-
-octoprint.teccryptor3dprint.dpdns.org {
-    reverse_proxy 127.0.0.1:7080
+octoprit.teccryptor3dprint.dpdns.org {
+    tls /etc/caddy/certs/teccryptor3dprint.pem /etc/caddy/certs/teccryptor3dprint.key
+    reverse_proxy http://192.168.100.105:5003
+    log {
+        output file /var/log/caddy/octoprit.log
+        level INFO
+    }
 }
 
 openclaw.teccryptor3dprint.dpdns.org {
-    reverse_proxy 127.0.0.1:7080
+    tls /etc/caddy/certs/openclaw.pem /etc/caddy/certs/openclaw.key
+    reverse_proxy http://192.168.100.105:18789
+    log {
+        output file /var/log/caddy/openclaw.log
+        level INFO
+    }
+}
+
+umbrel.teccryptor3dprint.dpdns.org {
+    tls /etc/caddy/certs/umbrel.pem /etc/caddy/certs/umbrel.key
+    reverse_proxy http://192.168.100.105:7080
+    log {
+        output file /var/log/caddy/umbrel.log
+        level INFO
+    }
+}
+
+mjpg-streamer.teccryptor3dprint.dpdns.org {
+    tls /etc/caddy/certs/mjpg-streamer.pem /etc/caddy/certs/mjpg-streamer.key
+    reverse_proxy http://192.168.100.105:8080
+    log {
+        output file /var/log/caddy/mjpg-streamer.log
+        level INFO
+    }
 }
