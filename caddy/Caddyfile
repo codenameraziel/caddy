@@ -1,12 +1,23 @@
-octoprint.teccryptor3dprint.dpdns.org {
-    reverse_proxy octoprint:5000 {
+# Expor o Umbrel inteiro
+umbrel.teccryptor3dprint.dpdns.org {
+    reverse_proxy 127.0.0.1:7080 {
         header_up Host {host}
         header_up X-Forwarded-Proto {scheme}
     }
 }
+
+# Expor o OctoPrint via Umbrel
+octoprint.teccryptor3dprint.dpdns.org {
+    reverse_proxy 127.0.0.1:7080 {
+        header_up Host {host}
+        header_up X-Forwarded-Proto {scheme}
+    }
+}
+
+# Expor o OpenClaw via Umbrel (se estiver integrado como app)
 openclaw.teccryptor3dprint.dpdns.org {
-    reverse_proxy 192.168.100.105:8070 {
-        header_up X-Forwarded-For {remote_host}
+    reverse_proxy 127.0.0.1:7080 {
+        header_up Host {host}
         header_up X-Forwarded-Proto {scheme}
     }
 }
