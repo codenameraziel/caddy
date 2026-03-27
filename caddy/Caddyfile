@@ -1,6 +1,12 @@
 portainer.teccryptor3dprint.dpdns.org {
     tls /etc/caddy/certs/portainer.pem /etc/caddy/certs/portainer.key
-    reverse_proxy http://192.168.100.105:9000
+    reverse_proxy http://192.168.100.105:9000 {
+        header_up Host {host}
+        header_up X-Forwarded-For {remote_host}
+        header_up X-Forwarded-Proto {scheme}
+        header_up Cookie {http.request.header.Cookie}
+        header_up Authorization {http.request.header.Authorization}
+    }
     log {
         output file /var/log/caddy/portainer.log
         level INFO
@@ -9,7 +15,13 @@ portainer.teccryptor3dprint.dpdns.org {
 
 octoprit.teccryptor3dprint.dpdns.org {
     tls /etc/caddy/certs/octoprit.pem /etc/caddy/certs/octoprit.key
-    reverse_proxy http://192.168.100.105:5003
+    reverse_proxy http://192.168.100.105:5003 {
+        header_up Host {host}
+        header_up X-Forwarded-For {remote_host}
+        header_up X-Forwarded-Proto {scheme}
+        header_up Cookie {http.request.header.Cookie}
+        header_up Authorization {http.request.header.Authorization}
+    }
     log {
         output file /var/log/caddy/octoprit.log
         level INFO
@@ -18,7 +30,13 @@ octoprit.teccryptor3dprint.dpdns.org {
 
 openclaw.teccryptor3dprint.dpdns.org {
     tls /etc/caddy/certs/openclaw.pem /etc/caddy/certs/openclaw.key
-    reverse_proxy http://192.168.100.105:18789
+    reverse_proxy http://192.168.100.105:18789 {
+        header_up Host {host}
+        header_up X-Forwarded-For {remote_host}
+        header_up X-Forwarded-Proto {scheme}
+        header_up Cookie {http.request.header.Cookie}
+        header_up Authorization {http.request.header.Authorization}
+    }
     log {
         output file /var/log/caddy/openclaw.log
         level INFO
@@ -27,7 +45,13 @@ openclaw.teccryptor3dprint.dpdns.org {
 
 umbrel.teccryptor3dprint.dpdns.org {
     tls /etc/caddy/certs/umbrel.pem /etc/caddy/certs/umbrel.key
-    reverse_proxy http://192.168.100.105:7080
+    reverse_proxy http://192.168.100.105:7080 {
+        header_up Host {host}
+        header_up X-Forwarded-For {remote_host}
+        header_up X-Forwarded-Proto {scheme}
+        header_up Cookie {http.request.header.Cookie}
+        header_up Authorization {http.request.header.Authorization}
+    }
     log {
         output file /var/log/caddy/umbrel.log
         level INFO
@@ -36,10 +60,15 @@ umbrel.teccryptor3dprint.dpdns.org {
 
 mjpg-streamer.teccryptor3dprint.dpdns.org {
     tls /etc/caddy/certs/mjpg-streamer.pem /etc/caddy/certs/mjpg-streamer.key
-    reverse_proxy http://192.168.100.105:8080
+    reverse_proxy http://192.168.100.105:8080 {
+        header_up Host {host}
+        header_up X-Forwarded-For {remote_host}
+        header_up X-Forwarded-Proto {scheme}
+        header_up Cookie {http.request.header.Cookie}
+        header_up Authorization {http.request.header.Authorization}
+    }
     log {
         output file /var/log/caddy/mjpg-streamer.log
         level INFO
     }
 }
-
