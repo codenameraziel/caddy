@@ -8,7 +8,7 @@ portainer.teccryptor3dprint.dpdns.org {
 }
 
 octoprit.teccryptor3dprint.dpdns.org {
-    tls /etc/caddy/certs/teccryptor3dprint.pem /etc/caddy/certs/teccryptor3dprint.key
+    tls /etc/caddy/certs/octoprit.pem /etc/caddy/certs/octoprit.key
     reverse_proxy http://192.168.100.105:5003
     log {
         output file /var/log/caddy/octoprit.log
@@ -42,3 +42,4 @@ mjpg-streamer.teccryptor3dprint.dpdns.org {
         level INFO
     }
 }
+
