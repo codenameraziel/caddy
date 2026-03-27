@@ -1,5 +1,4 @@
 portainer.teccryptor3dprint.dpdns.org {
-    tls /etc/caddy/certs/portainer.pem /etc/caddy/certs/portainer.key
     reverse_proxy http://192.168.100.105:9000
     log {
         output file /var/log/caddy/portainer.log
@@ -8,7 +7,6 @@ portainer.teccryptor3dprint.dpdns.org {
 }
 
 octoprit.teccryptor3dprint.dpdns.org {
-    tls /etc/caddy/certs/octoprit.pem /etc/caddy/certs/octoprit.key
     reverse_proxy http://192.168.100.105:5003
     log {
         output file /var/log/caddy/octoprit.log
@@ -17,7 +15,6 @@ octoprit.teccryptor3dprint.dpdns.org {
 }
 
 openclaw.teccryptor3dprint.dpdns.org {
-    tls /etc/caddy/certs/openclaw.pem /etc/caddy/certs/openclaw.key
     reverse_proxy http://192.168.100.105:18789
     log {
         output file /var/log/caddy/openclaw.log
@@ -26,7 +23,6 @@ openclaw.teccryptor3dprint.dpdns.org {
 }
 
 umbrel.teccryptor3dprint.dpdns.org {
-    tls /etc/caddy/certs/umbrel.pem /etc/caddy/certs/umbrel.key
     reverse_proxy http://192.168.100.105:7080
     log {
         output file /var/log/caddy/umbrel.log
@@ -35,11 +31,9 @@ umbrel.teccryptor3dprint.dpdns.org {
 }
 
 mjpg-streamer.teccryptor3dprint.dpdns.org {
-    tls /etc/caddy/certs/mjpg-streamer.pem /etc/caddy/certs/mjpg-streamer.key
     reverse_proxy http://192.168.100.105:8080
     log {
         output file /var/log/caddy/mjpg-streamer.log
         level INFO
     }
 }
-
